@@ -1,0 +1,45 @@
+#VennDiagram
+#install.packages("VennDiagram")
+library(VennDiagram)
+#install.packages("yarr")
+library(yarrr)
+library(RColorBrewer)
+myCol <- brewer.pal(3, "Pastel2")
+
+#getwd()
+##Set as working directory in order to read files (you might need to change it, this is in my PC)
+setwd("~/_KSHV_Project/Scarna_files")
+#Get data from original files MS and FA
+scarnas <- read.table("Scarna.table_Categoric.txt", TRUE, "\t")
+
+# Prepare a palette of X number of colors with R colorbrewer:
+#library(RColorBrewer)
+#myCol <- brewer.pal(3, "Pastel2")
+#myCol2 <- brewer.pal(2, "Pastel2")
+myCol5 <- brewer.pal(5, "Pastel2")
+
+##Trying to fix it
+#require(venneuler)
+#install.packages("venneuler")
+m <- as.matrix(data.frame(scarnas))
+
+#Plot the venn.diagram and save it as a png file in the working directory
+
+venn.diagram(
+  x= list(scarnas$T0, scarnas$T1, scarnas$T2, scarnas$T3, scarnas$T4),
+  category.names = c("T0", "T1", "T2", "T3", "T4"),
+  filename = "test.png",
+  output=TRUE,
+  col = myCol5,
+  fill= myCol5,
+  #Adjusting the size of the font for the numbers
+  cex = 1.7,
+  fontfamily = "sans",
+  #fontface = "bold",
+  #Adjusting the size of the font for the category's labels
+  cat.cex = 1,
+  cat.fontface = "bold",
+  cat.default.pos = "outer",
+  cat.fontfamily = "sans"
+  )
+
